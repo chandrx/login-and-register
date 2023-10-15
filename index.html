@@ -1,0 +1,176 @@
+<html>
+    <head>
+        <title>login and register</title>
+        <style>
+            #root {
+                background: url(bg2.jpg);
+                color: rgb(255, 140, 0);
+                font-size: 2em;
+                text-align: center;
+                height: 100vh;
+            }
+            #root2 {
+                background:url(bg.jpg) ;
+                color: rgb(0, 255, 4);
+                font-size: 2em;
+                text-align: center;
+                height: 100vh;
+            }
+            .img2{
+                width: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root">
+            <h1>LOGIN</h1>
+            <input type="text" placeholder="username" id="usernameinput"/>
+            <input type="password" placeholder="password" id="passwordinput"/>
+            <button onclick="onLogin()" id="loginbutton">Login</button>
+            <button onclick="onLogout()" id="logoutbutton">Logout</button>
+            <h1 id="admin">LOGIN SEBAGAI ADMIN <img src="download.jpg" alt=""></h1>
+            <h1 id="basic">LOGIN SEBAGAI USER BIASA <img src="download3.jpg" alt=""></h1>
+            <h1 id="vip">LOGIN SEBAGAI VIP <img src="download2.jpg" alt="" class="img2"></h1> 
+            </div>
+
+            <div id="root2">
+                <h1>REGISTER</h1>
+                <input type="text" placeholder="name" id="nameinput"/>
+                <input type="email" placeholder="email" id="emailinput"/>
+                <button onclick="onDaftar()" id="Daftarbutton">Daftar</button>
+                <button onclick="onKeluar()" id="Keluarbutton">Keluar</button>
+                <h1 id="daftar">ini adalah akunku..</h1>
+                <h1 id="biasa">siapa lu </h1>
+
+            </div>
+
+        <script type="application/javascript">
+
+            let username = document.getElementById('usernameinput');
+            let name = document.getElementById('nameinput');
+            let password = document.getElementById('passwordinput');
+            let email = document.getElementById('emailinput');
+            let loginbutton = document.getElementById('loginbutton');
+            let logoutbutton = document.getElementById('logoutbutton');
+            let Daftarbutton = document.getElementById('Daftarbutton');
+            let Keluarbutton = document.getElementById('Keluarbutton');
+            let admin = document.getElementById('admin');
+            let basic = document.getElementById('basic');
+            let vip = document.getElementById('vip');
+            let daftar = document.getElementById('daftar');
+            let biasa = document.getElementById('biasa');
+
+            admin.style.display = "none";
+            basic.style.display = "none";
+            vip.style.display = "none";
+            daftar.style.display = "none";
+            biasa.style.display = "none";
+            logoutbutton.style.display = "none";
+            Keluarbutton.style.display = "none";
+
+            
+        
+
+         function onLogin () {
+            localStorage.setItem("username",usernameinput.value)
+            logoutbutton.style.display = "block"
+            if(usernameinput.value == "admin" && passwordinput.value
+             == "admin123"){
+                localStorage.setItem("role","admin")
+                usernameinput.style.display = "none";
+                passwordinput.style.display = "none";
+                loginbutton.style.display = "none";
+                admin.style.display = "block";
+                basic.style.display = "none";
+                vip.style.display = "none";
+             }else if (usernameinput.value == "vip" && passwordinput.value
+             == "vip123"){
+                localStorage.setItem("role","vip")
+                usernameinput.style.display = "none";
+                passwordinput.style.display = "none";
+                loginbutton.style.display = "none";
+                vip.style.display = "block";
+                basic.style.display = "none";
+                admin.style.display = "none";
+             }else{
+                usernameinput.style.display = "none";
+                passwordinput.style.display = "none";
+                loginbutton.style.display = "none";
+                localStorage.setItem("role","basic")
+                basic.style.display = "block";
+                admin.style.display = "none";
+                vip.style.display = "none";
+            } 
+            if(localStorage.getItem('username')){
+            usernameinput.style.display = "none";
+            passwordinput.style.display = "none";
+            loginbutton.style.display = "none";
+            logoutbutton.style.display = "block";
+            if(localStorage.getItem('role') == "admin"){
+            admin.style.display = "block";
+            basic.style.display = "none";
+            vip.style.display = "none";
+            }else if(localStorage.getItem('role') == "vip"){  
+            vip.style.display = "block";
+            basic.style.display = "none";
+            admin.style.display = "none";
+            }else{
+            basic.style.display = "block";
+            admin.style.display = "none";
+            vip.style.display = "none";
+            }
+        }
+         }
+         function onLogout(){
+            localStorage.clear();
+            location.reload();
+        }
+
+        function onDaftar(){
+            localStorage.setItem("name",nameinput.value)
+            Keluarbutton.style.display = "block"
+            if(nameinput.value == "Chandra" && emailinput.value
+             == "chandraadam606@gmail.com"){
+                localStorage.setItem("role","daftar")
+                nameinput.style.display = "none";
+                emailinput.style.display = "none";
+                Daftarbutton.style.display = "none";
+                daftar.style.display = "block";
+                biasa.style.display = "none";
+             }else{
+                localStorage.setItem("role","biasa")
+                nameinput.style.display = "none";
+                emailinput.style.display = "none";
+                Daftarbutton.style.display = "none"
+                biasa.style.display = "block";
+                daftar.style.display = "none";
+            }
+        }
+
+
+         if(localStorage.getItem('name')){
+            nameinput.style.display = "none";
+            emailinput.style.display = "none";
+            Daftarbutton.style.display = "none";
+            Keluarbutton.style.display = "block";
+            if(localStorage.getItem('role') == "daftar"){
+                daftar.style.display = "block";  
+                biasa.style.display = "none";
+            }else{
+                biasa.style.display = "block";
+                daftar.style.display = "none";
+         }
+        }
+
+         
+        
+
+        function onKeluar(){
+            localStorage.clear();
+            location.reload();
+        }
+
+        
+        </script>
+    </body>
+</html>
